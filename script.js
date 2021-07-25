@@ -7,21 +7,25 @@ var hr = 0;
 var min = 0
 var sec = 0;
 var stoptime = true;
+var playtime = true
 playBtn.addEventListener('click', playpauseTimer);
 resetBtn.addEventListener('click', resetTimer)
 function playpauseTimer() {
-   if (stoptime == true) {
+   if (stoptime == true && playtime == false) {
        stoptime = false;
+       playtime = true;
        timerCyrcle();
        icon.setAttribute("class", "fi-sr-pause");
    } else {
        stoptime = true;
-       icon.setAttribute(" class", "fi-sr-play");
+       playtime = false;
+       icon.setAttribute("class", "fi-sr-play");
    }
 }
 function resetTimer(){
     timer.innerHTML = "00:00:00"
     stoptime = true;
+    playtime = false;
     hr = 0;
     sec = 0;
     min = 0;
@@ -30,7 +34,7 @@ setInterval(function(){
     secCircle.style.transform = `rotate(${6*sec}deg)`
 }, 1000);
 function timerCyrcle(){
-    if ( stoptime == false) {
+    if ( stoptime == false &&  playtime == true) {
         sec = parseInt(sec); 
         min = parseInt(min); 
         hr  = parseInt(hr); 
